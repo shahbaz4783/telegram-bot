@@ -1,28 +1,18 @@
 import 'dotenv/config';
-
-// import { Bot } from 'grammy';
-
-// const bot = new Bot(process.env.BOT_TOKEN as string);
-
-// // Handle the /start command.
-// bot.command('start', (ctx) =>
-// 	ctx.reply(`Hey ${ctx.from?.first_name}. Welcome! Up and running.`)
-// );
-
-// bot.on('message', async (ctx) => {
-// 	const message = ctx.message;
-// 	console.log(message.text);
-// });
-
-// bot.start();
-
 import { Bot, webhookCallback } from 'grammy';
 import express from 'express';
 
 const bot = new Bot(process.env.BOT_TOKEN!);
 
-bot.command('start', (ctx) => ctx.reply(`Welcome ${ctx.from?.first_name}`));
-bot.command('help', (ctx) => ctx.reply('Send /start to start the bot.'));
+bot.command('start', (ctx) => {
+	console.log('Received /start command');
+	ctx.reply(`Welcome ${ctx.from?.first_name}`);
+});
+
+bot.command('help', (ctx) => {
+	console.log('Received /help command');
+	ctx.reply('Send /start to start the bot.');
+});
 
 const app = express();
 app.use(express.json());
@@ -35,6 +25,10 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
 	console.log(`Server is running on port ${PORT}`);
-  await bot.api.setWebhook(process.env.URL + secretPath);
+	try {
+		await bot.api.setWebhook(`${process.env.URL}${secretPath}`);
+		console.log('Webhook set successfully');
+	} catch (error) {
+		console.error('Error setting webhook:', error);
+	}
 });
-
