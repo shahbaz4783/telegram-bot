@@ -1,4 +1,4 @@
-// import 'dotenv/config';
+import 'dotenv/config';
 
 // import { Bot } from 'grammy';
 
@@ -32,8 +32,9 @@ const secretPath = `/webhook/${bot.token}`;
 app.use(secretPath, webhookCallback(bot, 'express'));
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, async () => {
 	console.log(`Server is running on port ${PORT}`);
-	// Set the webhook
-	await bot.api.setWebhook(process.env.URL + secretPath);
+  await bot.api.setWebhook(process.env.URL + secretPath);
 });
+
