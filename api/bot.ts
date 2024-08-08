@@ -18,18 +18,11 @@ const app = express();
 app.use(express.json());
 
 // Set up the webhook
-const secretPath = `/webhook/${bot.token}`;
-app.use(secretPath, webhookCallback(bot, 'express'));
+app.use(webhookCallback(bot, 'express'));
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
 	console.log(`Server is running on port ${PORT}`);
-	try {
-		await bot.api.setWebhook(`${process.env.URL}${secretPath}`);
-		console.log('Webhook set successfully');
-	} catch (error) {
-		console.error('Error setting webhook:', error);
-	}
 });
 
