@@ -26,10 +26,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
 	console.log(`Server is running on port ${PORT}`);
 	try {
-		await bot.api.setWebhook(`${process.env.URL}${secretPath}`);
+		await bot.api.setWebhook(`${process.env.URL}/api/bot`);
 		console.log('Webhook set successfully');
 	} catch (error) {
 		console.error('Error setting webhook:', error);
 	}
 });
-
