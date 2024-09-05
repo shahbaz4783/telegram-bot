@@ -6,20 +6,15 @@ const bot = new Bot(process.env.BOT_TOKEN!);
 
 await bot.api.setMyCommands([
 	{ command: 'start', description: 'Start the bot' },
-	{ command: 'help', description: 'Show help text' },
-	{ command: 'report', description: 'Report' },
+	{ command: 'help', description: 'Help options' },
 ]);
 
 bot.command('start', async (ctx) => {
 	const keyboard = new InlineKeyboard()
-		.url('Open Mini App', 'https://t.me/bot_nextjs_bot/start')
-		.row()
-		.text('Explore Guide', 'explore_guide')
-		.row()
-		.text('Tap to Earn', 'tap_to_earn');
+		.url('Open Mini App', 'https://t.me/twa_development_bot/start')
 
-	await ctx.replyWithPhoto('https://grammy.dev/images/grammY.png', {
-		caption: 'Welcome to TapSwap! Tap on the buttons below to get started.',
+	await ctx.replyWithPhoto('https://extassisnetwork.com/tutoriales/wp-content/uploads/localhost.jpg', {
+		caption: 'This bot is used for development of telegram mini',
 		reply_markup: keyboard,
 	});
 });
